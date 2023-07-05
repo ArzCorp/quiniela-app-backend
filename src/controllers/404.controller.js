@@ -1,4 +1,5 @@
 import path from 'path'
+import { PATHS } from '../utils/constants.js'
 
 export const notFoundController = (req, res) =>
-  res.sendFile(path.resolve('./src/static/404/index.html'))
+  res.sendFile(path.resolve(PATHS[404]))
