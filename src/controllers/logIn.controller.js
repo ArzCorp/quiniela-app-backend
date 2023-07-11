@@ -13,15 +13,20 @@ export const logInController = async (req, res) => {
     const { email, password: receivedPassword } = body
     const response = { ...RESPONSE_TEMPLATE }
 
-    const [userResponse] = await db.query(QUERYS.LOG_IN, [email])
+    const [[userResponse]] = await db.query(QUERYS.LOG_IN, [email])
 
     if (userResponse.length <= 0) throw new Error(ERROR_MESSAGES.LOG_IN)
+
     const [user] = userResponse
-    const { password: userPassword } = user
+    const { user_id } = user
+
+    const [[[{ user_password }]]] = await db.query(QUERYS.GET_USER_PASSWORD, [
+      user_id,
+    ])
 
     const isPasswordEqual = await comparePasswords(
       receivedPassword,
-      userPassword
+      user_password
     )
 
     if (!isPasswordEqual) throw new Error(ERROR_MESSAGES.LOG_IN)

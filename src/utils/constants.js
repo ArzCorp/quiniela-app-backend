@@ -23,8 +23,9 @@ export const PATHS = Object.freeze({
 })
 
 export const QUERYS = Object.freeze({
-  LOG_IN: 'SELECT * FROM `users` WHERE `users`.`email` = ?',
+  LOG_IN: 'CALL `get_user_by_email`(?)',
   REGISTER: 'CALL `create_user`(?, ?, ?, ?, ?)',
+  GET_USER_PASSWORD: 'CALL `get_user_password`(?)',
 })
 
 export const ERROR_MESSAGES = Object.freeze({
