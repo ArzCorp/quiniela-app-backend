@@ -15,9 +15,11 @@ export const ROUTES = Object.freeze({
   HOME: '/',
   LOG_IN: '/login',
   REGISTER: '/register',
-  GET_TEAMS: '/teams',
-  GET_TEAM: '/teams/:id',
+  GET_TEAMS: '/teams/get',
+  GET_TEAM: '/teams/get/:id',
   DELETE_TEAM: '/teams/delete/:id',
+  UPDATE_TEAM: '/teams/update/:id',
+  CREATE_TEAM: '/teams/create/',
 })
 
 export const PATHS = Object.freeze({
@@ -32,6 +34,8 @@ export const QUERYS = Object.freeze({
   GET_TEAMS: 'CALL `get_all_teams`()',
   GET_TEAM: 'CALL `get_team`(?)',
   DELETE_TEAM: 'CALL `delete_team`(?)',
+  UPDATE_TEAM: 'CALL `update_team`(?, ?, ?)',
+  CREATE_TEAM: 'CALL `create_team`(?, ?)',
 })
 
 export const ERROR_MESSAGES = Object.freeze({
@@ -40,12 +44,16 @@ export const ERROR_MESSAGES = Object.freeze({
   LOG_IN: 'Los datos proporcionados son incorrectos.',
   WITHOUT_TEAMS: 'No se encontraron equipos.',
   WITHOUT_TEAM: 'Equipo no existe, intenta de nuevo.',
-  TEAM_DELETE_ERROR: 'No se pudo eliminar el equipo, intente de nuevo.',
+  DELETE_TEAM: 'No se pudo eliminar el equipo, intente de nuevo.',
+  UPDATE_TEAM: 'No se pudo actualizar el equipo, intente de nuevo.',
+  CREATE_TEAM: 'No se pudo crear el equipo, intente más tarde.',
 })
 
 export const SUCCESS_MESSAGES = Object.freeze({
   REGISTER: 'Usuario creado con éxito.',
   DELETE: 'eliminado con éxito,',
+  UPDATE: 'actualizado con éxito.',
+  CREATE: 'creado con éxito.',
 })
 
 export const STATUS_CODES = Object.freeze({

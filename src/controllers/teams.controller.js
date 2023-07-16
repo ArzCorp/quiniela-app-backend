@@ -3,7 +3,6 @@ import {
   ERROR_MESSAGES,
   QUERYS,
   RESPONSE_TEMPLATE,
-  STATUS_CODES,
   SUCCESS_MESSAGES,
 } from '../utils/constants.js'
 import { getResponseError } from '../utils/getResponseError.js'
@@ -52,10 +51,33 @@ export const deleteTeam = async (req, res) => {
 
     const [queryRes] = await db.query(QUERYS.DELETE_TEAM, [id])
 
-    if (queryRes.affectedRows <= 0)
-      throw new Error(ERROR_MESSAGES.TEAM_DELETE_ERROR)
+    if (queryRes.affectedRows <= 0) throw new Error(ERROR_MESSAGES.DELETE_TEAM)
 
     response.message = `Equipo id ${id} ${SUCCESS_MESSAGES.DELETE}`
+    res.status(response.code).json(response)
+  } catch (error) {
+    const response = getResponseError({ message: error.message })
+    res.status(response.code).json(response)
+  }
+}
+
+export const updateTeam = async (req, res) => {
+  try {
+    const { params, body } = req
+    const { id } = params
+    const { name, logoImage } = body
+    const response = { ...RESPONSE_TEMPLATE }
+
+    const [updateTeamResponse] = await db.query(QUERYS.UPDATE_TEAM, [
+      id,
+      name,
+      logoImage,
+    ])
+
+    if (updateTeamResponse.affectedRows <= 0)
+      throw new Error(ERROR_MESSAGES.UPDATE_TEAM)
+
+    response.message = `Equipo id ${id} ${SUCCESS_MESSAGES.UPDATE}`
     res.status(response.code).json(response)
   } catch (error) {
     const response = getResponseError({ message: error.message })
