@@ -20,6 +20,11 @@ export const ROUTES = Object.freeze({
   DELETE_TEAM: '/teams/delete/:id',
   UPDATE_TEAM: '/teams/update/:id',
   CREATE_TEAM: '/teams/create/',
+  GET_SOCCER_LEAGUES: '/soccer-leagues/get/all',
+  GET_SOCCER_LEAGUE: '/soccer-league/get/:id',
+  DELETE_SOCCER_LEAGUE: '/soccer-league/delete/:id',
+  UPDATE_SOCCER_LEAGUE: '/soccer-league/update/:id',
+  CREATE_SOCCER_LEAGUE: '/soccer-league/create',
 })
 
 export const PATHS = Object.freeze({
@@ -36,6 +41,11 @@ export const QUERYS = Object.freeze({
   DELETE_TEAM: 'CALL `delete_team`(?)',
   UPDATE_TEAM: 'CALL `update_team`(?, ?, ?)',
   CREATE_TEAM: 'CALL `create_team`(?, ?)',
+  GET_ALL_SOCCER_LEAGUES: 'CALL `get_all_soccer_leagues`()',
+  GET_SOCCER_LEAGUE: 'CALL `get_soccer_league`(?)',
+  DELETE_SOCCER_LEAGUE: 'CALL `delete_soccer_league`(?)',
+  UPDATE_SOCCER_LEAGUE: 'CALL `update_soccer_league`(?, ?, ?)',
+  CREATE_SOCCER_LEAGUE: 'CALL `create_soccer_league`(?, ?)',
 })
 
 export const ERROR_MESSAGES = Object.freeze({
