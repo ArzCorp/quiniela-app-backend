@@ -3,6 +3,7 @@ import {
   ERROR_MESSAGES,
   QUERYS,
   RESPONSE_TEMPLATE,
+  STATUS_CODES,
   SUCCESS_MESSAGES,
 } from '../utils/constants.js'
 import { getResponseError } from '../utils/getResponseError.js'
@@ -78,6 +79,29 @@ export const updateTeam = async (req, res) => {
       throw new Error(ERROR_MESSAGES.UPDATE_TEAM)
 
     response.message = `Equipo id ${id} ${SUCCESS_MESSAGES.UPDATE}`
+    res.status(response.code).json(response)
+  } catch (error) {
+    const response = getResponseError({ message: error.message })
+    res.status(response.code).json(response)
+  }
+}
+
+export const createTeam = async (req, res) => {
+  try {
+    const { body } = req
+    const { name, logoImage } = body
+    const response = { ...RESPONSE_TEMPLATE }
+
+    const [updateTeamResponse] = await db.query(QUERYS.CREATE_TEAM, [
+      name,
+      logoImage,
+    ])
+
+    if (updateTeamResponse.affectedRows <= 0)
+      throw new Error(ERROR_MESSAGES.CREATE_TEAM)
+
+    response.message = `Equipo ${SUCCESS_MESSAGES.CREATE}`
+    response.code = STATUS_CODES.RESOURCE_CREATED
     res.status(response.code).json(response)
   } catch (error) {
     const response = getResponseError({ message: error.message })
