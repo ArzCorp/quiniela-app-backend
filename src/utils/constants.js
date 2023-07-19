@@ -58,6 +58,10 @@ export const ERROR_MESSAGES = Object.freeze({
   UPDATE_TEAM: 'No se pudo actualizar el equipo, intente de nuevo.',
   CREATE_TEAM: 'No se pudo crear el equipo, intente más tarde.',
   GET_SOCCER_LEAGUES: 'No se encontraron ligas de futbol.',
+  DELETE_SOCCER_LEAGUE:
+    'No se pudo eliminar la liga de futbol, intenta de nuevo.',
+  UPDATE_SOCCER_LEAGUE: 'Error al actualizar liga de futbol, intenta de nuevo.',
+  CREATE_SOCCER_LEAGUE: 'Error al crear liga de futbol, intenta de nuevo.',
 })
 
 export const SUCCESS_MESSAGES = Object.freeze({
