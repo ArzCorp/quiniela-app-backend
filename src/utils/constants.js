@@ -20,11 +20,11 @@ export const ROUTES = Object.freeze({
   DELETE_TEAM: '/teams/delete/:id',
   UPDATE_TEAM: '/teams/update/:id',
   CREATE_TEAM: '/teams/create/',
-  GET_SOCCER_LEAGUES: '/soccer-leagues/get/all',
-  GET_SOCCER_LEAGUE: '/soccer-league/get/:id',
-  DELETE_SOCCER_LEAGUE: '/soccer-league/delete/:id',
-  UPDATE_SOCCER_LEAGUE: '/soccer-league/update/:id',
-  CREATE_SOCCER_LEAGUE: '/soccer-league/create',
+  GET_SOCCER_LEAGUES: '/soccer-leagues/get',
+  GET_SOCCER_LEAGUE: '/soccer-leagues/get/:id',
+  DELETE_SOCCER_LEAGUE: '/soccer-leagues/delete/:id',
+  UPDATE_SOCCER_LEAGUE: '/soccer-leagues/update/:id',
+  CREATE_SOCCER_LEAGUE: '/soccer-leagues/create',
 })
 
 export const PATHS = Object.freeze({
@@ -57,6 +57,7 @@ export const ERROR_MESSAGES = Object.freeze({
   DELETE_TEAM: 'No se pudo eliminar el equipo, intente de nuevo.',
   UPDATE_TEAM: 'No se pudo actualizar el equipo, intente de nuevo.',
   CREATE_TEAM: 'No se pudo crear el equipo, intente más tarde.',
+  GET_SOCCER_LEAGUES: 'No se encontraron ligas de futbol.',
 })
 
 export const SUCCESS_MESSAGES = Object.freeze({
