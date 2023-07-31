@@ -8,15 +8,17 @@ import {
 } from '../utils/constants.js'
 import { getResponseError } from '../utils/getResponseError.js'
 
-export const getAllTeams = async (req, res) => {
+export const getAllSoccerLeagues = async (req, res) => {
   try {
     const response = { ...RESPONSE_TEMPLATE }
-    const [[teams]] = await db.query(QUERYS.GET_TEAMS)
 
-    if (teams.length <= 0) throw new Error(ERROR_MESSAGES.WITHOUT_TEAMS)
+    const [[soccerLeagues]] = await db.query(QUERYS.GET_ALL_SOCCER_LEAGUES)
 
-    response.data = teams
-    response.results = teams.length
+    if (soccerLeagues.length <= 0)
+      throw new Error(ERROR_MESSAGES.GET_SOCCER_LEAGUES)
+
+    response.data = soccerLeagues
+    response.results = soccerLeagues.length
     res.status(response.code).json(response)
   } catch (error) {
     const response = getResponseError({ message: error.message })
@@ -24,37 +26,19 @@ export const getAllTeams = async (req, res) => {
   }
 }
 
-export const getTeam = async (req, res) => {
-  try {
-    const response = { ...RESPONSE_TEMPLATE }
-    const { params } = req
-    const { id } = params
-
-    const [[team]] = await db.query(QUERYS.GET_TEAM, [id])
-
-    if (team.length <= 0) throw new Error(ERROR_MESSAGES.WITHOUT_TEAM)
-
-    response.data = team
-    response.results = team.length
-    res.status(response.code).json(response)
-  } catch (error) {
-    console.log(error)
-    const response = getResponseError({ message: error.message })
-    res.status(response.code).json(response)
-  }
-}
-
-export const deleteTeam = async (req, res) => {
+export const getSoccerLeague = async (req, res) => {
   try {
     const response = { ...RESPONSE_TEMPLATE }
     const { params } = req
     const { id } = params
 
-    const [queryRes] = await db.query(QUERYS.DELETE_TEAM, [id])
+    const [[soccerLeague]] = await db.query(QUERYS.GET_SOCCER_LEAGUE, [id])
 
-    if (queryRes.affectedRows <= 0) throw new Error(ERROR_MESSAGES.DELETE_TEAM)
+    if (soccerLeague.length <= 0)
+      throw new Error(ERROR_MESSAGES.GET_SOCCER_LEAGUES)
 
-    response.message = `Equipo id ${id} ${SUCCESS_MESSAGES.DELETE}`
+    response.data = soccerLeague
+    response.results = soccerLeague.length
     res.status(response.code).json(response)
   } catch (error) {
     const response = getResponseError({ message: error.message })
@@ -62,23 +46,44 @@ export const deleteTeam = async (req, res) => {
   }
 }
 
-export const updateTeam = async (req, res) => {
+export const deleteSoccerLeague = async (req, res) => {
   try {
+    const response = { ...RESPONSE_TEMPLATE }
+    const { params } = req
+    const { id } = params
+
+    const [responseDelete] = await db.query(QUERYS.DELETE_SOCCER_LEAGUE, [id])
+
+    if (responseDelete.affectedRows <= 0)
+      throw new Error(`${ERROR_MESSAGES.DELETE_SOCCER_LEAGUE}`)
+
+    response.code = STATUS_CODES.RESOURCE_CREATED
+    response.message = `Liga de futbol con id: ${id} ${SUCCESS_MESSAGES.DELETE}`
+    res.status(response.code).json(response)
+  } catch (error) {
+    const response = getResponseError({ message: error.message })
+    res.status(response.code).json(response)
+  }
+}
+
+export const updateSoccerLeague = async (req, res) => {
+  try {
+    const response = { ...RESPONSE_TEMPLATE }
     const { params, body } = req
     const { id } = params
     const { name, logoImage } = body
-    const response = { ...RESPONSE_TEMPLATE }
 
-    const [updateTeamResponse] = await db.query(QUERYS.UPDATE_TEAM, [
+    const [queryResponse] = await db.query(QUERYS.UPDATE_SOCCER_LEAGUE, [
       id,
       name,
       logoImage,
     ])
 
-    if (updateTeamResponse.affectedRows <= 0)
-      throw new Error(ERROR_MESSAGES.UPDATE_TEAM)
+    if (queryResponse.affectedRows <= 0)
+      throw new Error(ERROR_MESSAGES.UPDATE_SOCCER_LEAGUE)
 
-    response.message = `Equipo id ${id} ${SUCCESS_MESSAGES.UPDATE}`
+    response.code = STATUS_CODES.RESOURCE_CREATED
+    response.message = `Liga de futbol con id: ${id} ${SUCCESS_MESSAGES.UPDATE}`
     res.status(response.code).json(response)
   } catch (error) {
     const response = getResponseError({ message: error.message })
@@ -86,22 +91,22 @@ export const updateTeam = async (req, res) => {
   }
 }
 
-export const createTeam = async (req, res) => {
+export const createSoccerLeague = async (req, res) => {
   try {
+    const response = { ...RESPONSE_TEMPLATE }
     const { body } = req
     const { name, logoImage } = body
-    const response = { ...RESPONSE_TEMPLATE }
 
-    const [updateTeamResponse] = await db.query(QUERYS.CREATE_TEAM, [
+    const [queryResponse] = await db.query(QUERYS.CREATE_SOCCER_LEAGUE, [
       name,
       logoImage,
     ])
 
-    if (updateTeamResponse.affectedRows <= 0)
-      throw new Error(ERROR_MESSAGES.CREATE_TEAM)
+    if (queryResponse.affectedRows <= 0)
+      throw new Error(ERROR_MESSAGES.CREATE_SOCCER_LEAGUE)
 
-    response.message = `Equipo ${SUCCESS_MESSAGES.CREATE}`
     response.code = STATUS_CODES.RESOURCE_CREATED
+    response.message = `Liga de futbol ${SUCCESS_MESSAGES.CREATE}`
     res.status(response.code).json(response)
   } catch (error) {
     const response = getResponseError({ message: error.message })

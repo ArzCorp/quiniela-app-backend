@@ -15,9 +15,16 @@ export const ROUTES = Object.freeze({
   HOME: '/',
   LOG_IN: '/login',
   REGISTER: '/register',
-  GET_TEAMS: '/teams',
-  GET_TEAM: '/teams/:id',
+  GET_TEAMS: '/teams/get',
+  GET_TEAM: '/teams/get/:id',
   DELETE_TEAM: '/teams/delete/:id',
+  UPDATE_TEAM: '/teams/update/:id',
+  CREATE_TEAM: '/teams/create/',
+  GET_SOCCER_LEAGUES: '/soccer-leagues/get',
+  GET_SOCCER_LEAGUE: '/soccer-leagues/get/:id',
+  DELETE_SOCCER_LEAGUE: '/soccer-leagues/delete/:id',
+  UPDATE_SOCCER_LEAGUE: '/soccer-leagues/update/:id',
+  CREATE_SOCCER_LEAGUE: '/soccer-leagues/create',
 })
 
 export const PATHS = Object.freeze({
@@ -32,6 +39,13 @@ export const QUERYS = Object.freeze({
   GET_TEAMS: 'CALL `get_all_teams`()',
   GET_TEAM: 'CALL `get_team`(?)',
   DELETE_TEAM: 'CALL `delete_team`(?)',
+  UPDATE_TEAM: 'CALL `update_team`(?, ?, ?)',
+  CREATE_TEAM: 'CALL `create_team`(?, ?)',
+  GET_ALL_SOCCER_LEAGUES: 'CALL `get_all_soccer_leagues`()',
+  GET_SOCCER_LEAGUE: 'CALL `get_soccer_league`(?)',
+  DELETE_SOCCER_LEAGUE: 'CALL `delete_soccer_league`(?)',
+  UPDATE_SOCCER_LEAGUE: 'CALL `update_soccer_league`(?, ?, ?)',
+  CREATE_SOCCER_LEAGUE: 'CALL `create_soccer_league`(?, ?)',
 })
 
 export const ERROR_MESSAGES = Object.freeze({
@@ -40,12 +54,21 @@ export const ERROR_MESSAGES = Object.freeze({
   LOG_IN: 'Los datos proporcionados son incorrectos.',
   WITHOUT_TEAMS: 'No se encontraron equipos.',
   WITHOUT_TEAM: 'Equipo no existe, intenta de nuevo.',
-  TEAM_DELETE_ERROR: 'No se pudo eliminar el equipo, intente de nuevo.',
+  DELETE_TEAM: 'No se pudo eliminar el equipo, intente de nuevo.',
+  UPDATE_TEAM: 'No se pudo actualizar el equipo, intente de nuevo.',
+  CREATE_TEAM: 'No se pudo crear el equipo, intente más tarde.',
+  GET_SOCCER_LEAGUES: 'No se encontraron ligas de futbol.',
+  DELETE_SOCCER_LEAGUE:
+    'No se pudo eliminar la liga de futbol, intenta de nuevo.',
+  UPDATE_SOCCER_LEAGUE: 'Error al actualizar liga de futbol, intenta de nuevo.',
+  CREATE_SOCCER_LEAGUE: 'Error al crear liga de futbol, intenta de nuevo.',
 })
 
 export const SUCCESS_MESSAGES = Object.freeze({
   REGISTER: 'Usuario creado con éxito.',
   DELETE: 'eliminado con éxito,',
+  UPDATE: 'actualizado con éxito.',
+  CREATE: 'creado con éxito.',
 })
 
 export const STATUS_CODES = Object.freeze({
